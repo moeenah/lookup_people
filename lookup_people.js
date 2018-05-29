@@ -12,12 +12,7 @@ const client = new pg.Client({
   ssl      : settings.ssl
 });
 
-client.connect((err) => {
-  if (err) {
-    return console.error("Connection Error", err);
-  }
-
-  function lastname() {
+function lastname() {
        client.query(`SELECT * FROM famous_people WHERE last_name = '${search}';`, (err, result) => {
       if (err) {
         return console.error("error running query", err);
@@ -33,6 +28,7 @@ client.connect((err) => {
     });
   }
 
+function firstname() {
   client.query(`SELECT * FROM famous_people WHERE first_name = '${search}';`, (err, result) => {
     if (err) {
       return console.error("error running query", err);
@@ -50,5 +46,14 @@ client.connect((err) => {
       client.end();
     }
   });
+}
+
+client.connect((err) => {
+  if (err) {
+    return console.error("Connection Error", err);
+  }
+
+  firstname();
+
 });
 
