@@ -13,20 +13,20 @@ const client = new pg.Client({
 });
 
 function lastname() {
-       client.query(`SELECT * FROM famous_people WHERE last_name = '${search}';`, (err, result) => {
-      if (err) {
-        return console.error("error running query", err);
-      }
-      let num_people = result.rows.length;
-      console.log(`\nSearching...\nFound ${num_people} person(s) by the name '${search}'`);
+     client.query(`SELECT * FROM famous_people WHERE last_name = '${search}';`, (err, result) => {
+    if (err) {
+      return console.error("error running query", err);
+    }
+    let num_people = result.rows.length;
+    console.log(`\nSearching...\nFound ${num_people} person(s) by the name '${search}'`);
 
-      const result_arr = result.rows;
-      (result_arr).forEach(function(query) {
-        console.log(`- ${(result_arr).indexOf(query) + 1}: ${query.first_name} ${query.last_name}, born '${query.birthdate}' `);
-      })
-      client.end();
-    });
-  }
+    const result_arr = result.rows;
+    (result_arr).forEach(function(query) {
+      console.log(`- ${(result_arr).indexOf(query) + 1}: ${query.first_name} ${query.last_name}, born '${query.birthdate}' `);
+    })
+    client.end();
+  });
+}
 
 function firstname() {
   client.query(`SELECT * FROM famous_people WHERE first_name = '${search}';`, (err, result) => {
@@ -35,7 +35,9 @@ function firstname() {
     }
     let num_people = result.rows.length;
     if (num_people === 0) {
+      //if name entered is not a first name:
       lastname();
+
     } else {
       console.log(`\nSearching...\nFound ${num_people} person(s) by the name '${search}'`);
 
