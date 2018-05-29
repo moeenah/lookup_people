@@ -22,7 +22,7 @@ function lastname() {
 
     const result_arr = result.rows;
     (result_arr).forEach(function(query) {
-      console.log(`- ${(result_arr).indexOf(query) + 1}: ${query.first_name} ${query.last_name}, born '${query.birthdate}' `);
+      console.log(`- ${(result_arr).indexOf(query) + 1}: ${query.first_name} ${query.last_name}, born '${query.birthdate.toDateString()}' `);
     })
     client.end();
   });
