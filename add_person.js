@@ -1,5 +1,5 @@
 const settings = require("./settings");
-var knex = require('knex')({
+const knex = require('knex')({
   client: 'pg',
   connection: {
     host     : settings.hostname,
